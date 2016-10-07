@@ -5,9 +5,9 @@ public class Tester {
 		
 		System.out.println("");
 		Shape s1 = new Circle(5.5, "RED", false);  // Upcast Circle to Shape
-		System.out.println(s1);                    // which version?
-		System.out.println(s1.getArea());          // which version?    
-		System.out.println(s1.getPerimeter());     // which version?     
+		System.out.println(s1);                    // which version? in the subclass itself
+		System.out.println(s1.getArea());          // which version?in the implemented method in the subclass itself  
+		System.out.println(s1.getPerimeter());     // which version? in the implemented method in the subclass itself 
 		System.out.println(s1.getColor());
 		System.out.println(s1.isFilled());
 		//System.out.println(s1.getRadius());      // error! because getRadius() is not implemented in the super class Shape
