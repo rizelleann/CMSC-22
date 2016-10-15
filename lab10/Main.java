@@ -19,54 +19,49 @@ public class StudentDB {
 
     public static void main(String[] args) throws FileNotFoundException, IOException{
 
-        List<Student> myList = new ArrayList<>();
-        String sn;
-        String fn;
-        char mi;
-        String ln;
-        String c;
-        int yl;    
-        int choice = 0; 	
-       BufferedReader br = null;
+ List<Student> myList = new ArrayList<Student>();
+		String sn = "";
+		String fn = "";
+		char mi = '\0';
+		String ln = "";
+		String c = "";
+		int yl = 0;    
+		int choice = 0; 	
+	    BufferedReader br = null;
 
-       File file = new File("C:\\Users\\RizelleAnn\\Desktop\\testing.txt");
-       if(!file.exists()){
-            file.createNewFile();
-        }
-        try(Scanner sc = new Scanner(file)){
-            while(sc.hasNextLine()){
-            	//get every student's info here and adds it to the list
-        		String studNum = sc.nextLine();
-        		String fName = sc.nextLine();
-        		char midIn = sc.nextLine().charAt(0);
-        		String lName = sc.nextLine();
-        		String curse = sc.nextLine();
-        		int yrLevel = Integer.parseInt(sc.nextLine());
-            	Student s = new Student(studNum, fName, midIn, lName, curse, yrLevel);
-            	myList.add(s);
-            }
-        
-          
-            //for(Student s: myList) {
-             //System.out.println(s);}
-             System.out.println(myList.size());
-             for(int i = 0; i < myList.size(); i++) {
-                 System.out.println(myList.get(i).toString());
-             }
-           
-        } catch(IOException e) {
-        } finally {
-            //System.out.println("goodbye");
-            try{
-                    if(br!=null)
-                    br.close();
-            }
-            catch(IOException x){
-            }		
-        }
-        System.out.println(myList.size());
+	    
+	        /*try{
+	            br = new BufferedReader(new FileReader("C:\\Users\\RizelleAnn\\Desktop\\testing.txt"));	
+	            String line;
+	            Student s = new Student(sn, fn, mi, ln, c, yl);
+	            while((line = br.readLine()) != null) {
+	            	 	sn = line.toString();
+						fn = line;
+			        	mi = line.charAt(0);
+			        	ln = line;
+			        	c = line;
+			        	yl  = (int)Integer.parseInt(line);
+	                    
+	            }
+	            
+					myList.add(s);
+	        } catch(IOException e) {
+	        	e.printStackTrace();
+	        } finally {
+	            //System.out.println("goodbye");
+	            try{
+	                    if(br!=null)
+	                    br.close();
+	            }
+	            catch(IOException x){
+	            	x.printStackTrace();
+	            }		
+	        }
+/*
+	    for(Student s: myList) {
+            System.out.println(s);
 
-    //System.out.println("success");*/
+        }*///System.out.println("success");*/
 
 
         System.out.println("\n============== STUDENT INFORMATION SYTEM ==============\n");
@@ -186,7 +181,6 @@ public class StudentDB {
                     }
 
                      break;
-
             default: 
                 System.out.println("============== THANK YOU! ==============");
                 break;
