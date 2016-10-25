@@ -69,10 +69,8 @@ public class RPS extends Frame {
             public void windowClosing(WindowEvent we) {
                 System.exit(0);
             }
-        });
-          
+        });  
     }
-    
     class MyActionListener implements ActionListener {
 
         @Override
@@ -80,11 +78,8 @@ public class RPS extends Frame {
         
         String player = getPlayerChoice();
         String computer = computerRandomChoice();
-        
-       
-        //gameResult(player, computer, winner(player, computer));
-       winnerPerRound(player, computer);
-//        d.setVisible(false);
+        winnerPerRound(player, computer);
+//        
         } 
     }
     //gets the label chosen by player
@@ -150,7 +145,39 @@ public class RPS extends Frame {
      scoreC.setText(""+compScore);
      //sets score obtained by player
      scoreP.setText(""+playScore);
+     String gameWinner = "";
+     //if either one of the players reaches max score which is 5 then winner is declared
+     if(compScore == 5 || playScore == 5) {
+         if(playScore > compScore) {
+             gameWinner = "Player";
+             displayDialog(gameWinner);
+         } else if(playScore < compScore) {
+             gameWinner = "Computer";
+         } else {
+             gameWinner = "It's a Tie! Nobody Won!";
+         }
+     displayDialog(gameWinner);
+     }
      
+     
+    }
+    
+    //display the dialog signifying end of game
+    void displayDialog(String winner) {
+        d = new Dialog(this);
+        d.setLayout(new FlowLayout());
+        ok = new Button("OK");
+        ok.addActionListener ((ActionEvent e) -> {
+            // Hide dialog
+            System.exit(0);
+        });
+        
+        d.add(new Label (winner + " Wins!"));
+        d.add(ok);
+        d.pack();
+        d.setTitle("Game Over");
+        d.setSize(100,100);
+        d.setVisible(true);
     }
     
 
