@@ -1,0 +1,218 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package gui;
+
+/**
+ *
+ * @author RizelleAnn
+ */
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.Random;
+
+public class RPS extends Frame {
+    private Label yourChoice, computerScore, playerScore;
+    private CheckboxGroup choices;
+    private Checkbox rock, paper, scissors, lizard, spock;
+    private TextField scoreC, scoreP;
+    private TextArea result;
+    private Button button;
+    
+    int compScore, playScore;
+    Random ch = new Random();
+    public RPS(){
+        setLayout(new FlowLayout());
+             
+        yourChoice = new Label("Your Choice:");
+        add(yourChoice);
+        choices = new CheckboxGroup();
+        rock = new Checkbox("Rock", choices, true);
+        add(rock);
+        paper = new Checkbox("Paper", choices, true);
+        add(paper);
+        scissors = new Checkbox("Scissors", choices, true);
+        add(scissors);
+        lizard = new Checkbox("Lizard", choices, true);
+        add(lizard);
+        spock = new Checkbox("Spock", choices, true);
+        add(spock);
+        
+        result = new TextArea("Result");
+        result.setEditable(false);
+        add(result);
+        button = new Button("RockPaperScissorsLizardSpock!");
+        button.addActionListener(new MyActionListener());
+        add(button);
+        
+        playerScore  = new Label("Player:");
+        add(playerScore);
+        scoreP = new TextField("0", 10);
+        add(scoreP);
+     
+        computerScore = new Label("Computer:");
+        add(computerScore);
+        
+        scoreC = new TextField("0", 10);
+        add(scoreC);
+        
+        setTitle("RockPaperScissorsLizardSpock");
+        setSize(600, 400);
+        setVisible(true);
+        
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we) {
+                System.exit(0);
+            }
+        });
+          
+    }
+    
+    class MyActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+        
+        //String player = getPlayerChoice();
+        //String computer = computerRandomChoice();
+        
+       
+        gameResult();
+        } 
+    }
+    
+    String getPlayerChoice(){
+        Checkbox chk = choices.getSelectedCheckbox();
+        String player = chk.getLabel();
+        return player;
+    }
+    
+    
+    String computerRandomChoice(){
+        
+        int rand = ch.nextInt(5 - 1) + 1 + 1;
+        String comp = "";
+        if(rand == 1) {
+            comp = "Rock";
+        }
+        if(rand == 2) {
+            comp =  "Paper";
+        }
+        if(rand == 3) {
+            comp =  "Scissors";
+        }
+        if(rand == 4) {
+            comp = "Lizard";
+        }
+        if(rand == 5) {
+            comp = "Spock";
+        }    
+        return comp;
+    }
+    
+    int winner() {
+       // int compScore = 0;
+       // int playScore = 0; 
+        int win;
+        //paper -> rock spock
+        //scissors ->  lizard paper
+        //lizard -> paper spock
+        //spock -> scissors rock
+            
+        if(getPlayerChoice().equals("Rock") && !computerRandomChoice().equals("Rock")){
+            if(computerRandomChoice().equals("Lizard") || computerRandomChoice().equals("Scissors")){
+                win = 1;
+                
+                
+            } else {
+               
+                win = 0;
+            } 
+        } else if(getPlayerChoice().equals("Paper") && !computerRandomChoice().equals("Paper")){
+            if(computerRandomChoice().equals("Rock") || computerRandomChoice().equals("Spock")) {
+                
+                 win = 1;
+            } else {
+                
+
+                win = 0;
+            }
+        } else if(getPlayerChoice().equals("Scissors") && !computerRandomChoice().equals("Scissors")){
+            if(computerRandomChoice().equals("Lizard") || computerRandomChoice().equals("Paper")) {
+                
+                win = 1;
+             } else {
+               
+                win = 0;
+            }
+        } else if(getPlayerChoice().equals("Lizzard") && !computerRandomChoice().equals("Lizzard")){ 
+            if(computerRandomChoice().equals("Paper") || computerRandomChoice().equals("Spock")){
+                 
+                 win = 1;
+            } else {
+                ;
+                win = 0;
+            }
+        }  else if(getPlayerChoice().equals("Spock") && !computerRandomChoice().equals("Spock")){
+                if(computerRandomChoice().equals("Scissors") || computerRandomChoice().equals("Rock")){
+                 
+                    win = 1;
+                } else {
+                    win = 0;
+                    
+                    
+                }
+        } else {
+            win = -1;
+        }
+               
+        
+        
+        
+     return win;
+    }
+    int getScore(){
+      // int compScore;
+      if(winner() == 0)
+        return compScore++;
+      else if(winner() == 1) 
+          return playScore++;
+      else
+          return 0;
+    }
+    
+    void gameResult(){
+        result.setText("\nPlayer chooses " + getPlayerChoice() + "\nComputer chooses " + computerRandomChoice());
+        
+        
+        switch (winner()) {
+            case 0:
+                result.append("\n.....Computer Wins .....!");
+                scoreC.setText(""+getScore());
+        
+                break;
+            case 1:
+                result.append("\n.....Player Wins.....!");
+                scoreP.setText(""+getScore());
+                break;
+            case -1:
+                result.append("\n......TIE......!");
+                break;
+            default:
+                break;
+        }
+  
+    }
+    public static void main(String[] args) {
+        
+        new RPS();
+    }
+}
+
