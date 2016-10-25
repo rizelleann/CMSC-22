@@ -1,3 +1,4 @@
+/*
 
 package gui;
 
@@ -83,14 +84,14 @@ public class RPS extends Frame {
         gameResult();
         } 
     }
-    
+    //gets the label chosen by player
     String getPlayerChoice(){
         Checkbox chk = choices.getSelectedCheckbox();
         String player = chk.getLabel();
         return player;
     }
     
-    
+    //randomizes computer choice
     String computerRandomChoice(){
         
         int rand = ch.nextInt(5 - 1) + 1 + 1;
@@ -113,6 +114,7 @@ public class RPS extends Frame {
         return comp;
     }
     
+    //determines winner per round
     int winner() {
        // int compScore = 0;
        // int playScore = 0; 
@@ -121,69 +123,30 @@ public class RPS extends Frame {
         //scissors ->  lizard paper
         //lizard -> paper spock
         //spock -> scissors rock
-            
-        if(getPlayerChoice().equals("Rock") && !computerRandomChoice().equals("Rock")){
-            if(computerRandomChoice().equals("Lizard") || computerRandomChoice().equals("Scissors")){
-                win = 1;
-                
-                
-            } else {
-               
-                win = 0;
-            } 
-        } else if(getPlayerChoice().equals("Paper") && !computerRandomChoice().equals("Paper")){
-            if(computerRandomChoice().equals("Rock") || computerRandomChoice().equals("Spock")) {
-                
-                 win = 1;
-            } else {
-                
-
-                win = 0;
-            }
-        } else if(getPlayerChoice().equals("Scissors") && !computerRandomChoice().equals("Scissors")){
-            if(computerRandomChoice().equals("Lizard") || computerRandomChoice().equals("Paper")) {
-                
-                win = 1;
-             } else {
-               
-                win = 0;
-            }
-        } else if(getPlayerChoice().equals("Lizzard") && !computerRandomChoice().equals("Lizzard")){ 
-            if(computerRandomChoice().equals("Paper") || computerRandomChoice().equals("Spock")){
-                 
-                 win = 1;
-            } else {
-                ;
-                win = 0;
-            }
-        }  else if(getPlayerChoice().equals("Spock") && !computerRandomChoice().equals("Spock")){
-                if(computerRandomChoice().equals("Scissors") || computerRandomChoice().equals("Rock")){
-                 
-                    win = 1;
-                } else {
-                    win = 0;
-                    
-                    
-                }
-        } else {
+        
+        //if tie
+        if(getPlayerChoice().equals(computerRandomChoice())) {
             win = -1;
+         // user wins
+        } else if(getPlayerChoice().equals("Rock") && computerRandomChoice().equals("Lizard") || computerRandomChoice().equals("Scissors")){
+                win = 1;
+        } else if(getPlayerChoice().equals("Paper") && computerRandomChoice().equals("Rock") || computerRandomChoice().equals("Spock")) {
+            win = 1;
+        } else if(getPlayerChoice().equals("Scissors") && computerRandomChoice().equals("Lizard") || computerRandomChoice().equals("Paper")) {
+            win = 1; 
+        } else if(getPlayerChoice().equals("Lizzard") && computerRandomChoice().equals("Paper") || computerRandomChoice().equals("Spock")){
+            win = 1;
+        } else if(getPlayerChoice().equals("Spock") && computerRandomChoice().equals("Scissors") || computerRandomChoice().equals("Rock")){
+             win = 1;
+        } else {
+            //no tie and user is not the winner
+            win = 0;
         }
-               
-        
-        
-        
+  
      return win;
     }
-    int getScore(){
-      // int compScore;
-      if(winner() == 0)
-        return compScore++;
-      else if(winner() == 1) 
-          return playScore++;
-      else
-          return 0;
-    }
-    
+
+    //displays text in the text field for scores and result
     void gameResult(){
         result.setText("\nPlayer chooses " + getPlayerChoice() + "\nComputer chooses " + computerRandomChoice());
         
@@ -191,20 +154,24 @@ public class RPS extends Frame {
         switch (winner()) {
             case 0:
                 result.append("\n.....Computer Wins .....!");
-                scoreC.setText(""+getScore());
-        
+                compScore++;
                 break;
             case 1:
                 result.append("\n.....Player Wins.....!");
-                scoreP.setText(""+getScore());
+                playScore++;
                 break;
             case -1:
                 result.append("\n......TIE......!");
                 break;
             default:
                 break;
+        
         }
-  
+        
+     //sets score obtained by computer
+     scoreC.setText(""+compScore);
+     //sets score obtained by player
+     scoreP.setText(""+playScore);
     }
     public static void main(String[] args) {
         
