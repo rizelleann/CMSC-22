@@ -294,7 +294,6 @@ public final class Calculator extends JPanel {
                             } 
                         } catch(ArithmeticException ex){
                             finalRes = null;
-                            result.setText("  Error  ");
                         }
                         
                         break;
