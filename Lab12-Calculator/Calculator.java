@@ -270,7 +270,7 @@ public final class Calculator extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 num2 = new BigDecimal(result.getText());
-                BigDecimal percent = num2.multiply(num2.divide(new BigDecimal(100)));
+           
                 switch(op){
                     case '+'://addition
                         finalRes = num1.add(num2);
