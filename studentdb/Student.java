@@ -54,10 +54,12 @@ public class Student {
 	public void setYearLevel(int yearLevel) {
 		this.yearLevel = yearLevel;
 	}
-
-
-	/*public String toString() {
-		return getStudentNumber() + "\n" + getFirstName() + "\n" + getMiddleInitial() + "\n" + getLastName() + "\n" + getCourse() + "\n" + getYearLevel();
-	}*/
+	public String toString(){
+		return String.format("Student Number: %s \n"
+				+ "Name: %s ,%s %s \n" 
+				+ "Program: %s \n"
+				+ "Year Level: %s \n"
+				,studentNumber, lastName,firstName,middleInitial, course, yearLevel);
+	}
 }
 
