@@ -1,4 +1,4 @@
-import java io.Serializable;
+import java.io.Serializable;
 
 public class Course implements Serializable{
 	String courseCode;
@@ -18,7 +18,7 @@ public class Course implements Serializable{
 	public void setCourseDescription(String courseDescription){
 		this.courseDescription = courseDescription;
 	}
-	public String getCourseCode(){
+	public String getCourseDescription(){
 		return courseDescription;
 	}
 
