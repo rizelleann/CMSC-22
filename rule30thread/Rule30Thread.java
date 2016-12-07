@@ -1,24 +1,13 @@
 package rulethirty;
 
-public class Rule30Thread extends Thread{
+public class Rule30Threads extends Thread{
 	private static int[][] cells;
 	private int size;
-	private static int start;
-	private static int end;
 	private int row;
 	private int col;
-	
-	
-	public Rule30Thread(int size,int[][] cells, int start, int end){
-		this.size = size;
-		this.start = start;
-		this.end = end;
-		this.cells = cells;
-		
-	}
-	
-	public Rule30Thread(int x){
-		this(x, cells, start, end);
+
+	public Rule30Threads(int x){
+		this.size = x;
 		this.row = size;
 		this.col = size;
 		cells = new int[row][col];
@@ -28,6 +17,7 @@ public class Rule30Thread extends Thread{
 /*	111     110     101     100     011     010     001     000
 	 0       0       0       1       1       1       1       0   */
 	public void run(){
+		
 		for(int i = 0; i < size; i++){
 	        if(i == 0){
 	            for(int j=0; j < size; j++){
